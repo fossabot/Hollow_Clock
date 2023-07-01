@@ -50,3 +50,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+Firmware_prj/.vscode
+Firmware_prj/build
