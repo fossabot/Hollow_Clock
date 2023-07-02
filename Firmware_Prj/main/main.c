@@ -19,11 +19,11 @@ void app_main(void)
 
     //xTaskCreate(initialise_wifi_task, "initialise_wifi", 4096, &cb_user_data, 0, &wifi_task_handle);
     xTaskCreate(step_motor_task, "step_motor", 4096, &cb_user_data, 0, &motor_task_handle);
-  /*  while (1)
+    while (1)
     {
         EventBits_t uxBits_wifi = xEventGroupWaitBits(cb_user_data.all_event, ESPTOUCH_DONE_BIT, pdFALSE, pdTRUE, (TickType_t)0);
 
-        if (uxBits_wifi & (ESPTOUCH_DONE_BIT))
+        if (unlikely(uxBits_wifi & (ESPTOUCH_DONE_BIT)))
         {
             ESP_LOGI("MAIN", "Network found, prepare to connect SNTP");
             setenv("TZ", "EST-8", 1);
@@ -37,10 +37,9 @@ void app_main(void)
             break;
         }
         vTaskDelay(pdMS_TO_TICKS(1000));
-    }*/
+    }
     while (1)
     {
-        heap_caps_print_heap_info(MALLOC_CAP_DEFAULT);
         vTaskDelay(pdMS_TO_TICKS(2000));
     }
 }

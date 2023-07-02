@@ -132,7 +132,7 @@ void initialise_wifi_task(void *pvParameters)
     uint32_t len = sizeof(wifi_config_stored);
     esp_err_t ret = nvs_get_blob(wifi_nvs_handle, NVS_Key, &wifi_config_stored, (size_t *)&len);
 
-    if (ret == ESP_OK)
+    if (likely(ret == ESP_OK))
     {
         xEventGroupSetBits(signal->all_event, ESP_NVS_STORED_BIT);
         nvs_close(wifi_nvs_handle);
@@ -158,12 +158,12 @@ void smartconfig_task(void *pvParameters)
     while (1)
     {
         uxBits = xEventGroupWaitBits(signal->all_event, CONNECTED_BIT | ESPTOUCH_DONE_BIT, true, false, portMAX_DELAY);
-        if (uxBits & CONNECTED_BIT)
+        if (likely(uxBits & CONNECTED_BIT))
         {
             ESP_LOGI(TAG, "WiFi Connected to ap");
             xEventGroupSetBits(signal->all_event, CONNECTED_BIT);
         }
-        if (uxBits & ESPTOUCH_DONE_BIT)
+        if (likely(uxBits & ESPTOUCH_DONE_BIT))
         {
             ESP_LOGI(TAG, "smartconfig over");
             esp_smartconfig_stop();
