@@ -53,3 +53,4 @@ dkms.conf
 Firmware_Prj/.vscode
 Firmware_Prj/build
 Firmware_Prj/*.old
+Firmware_Prj/*.log
