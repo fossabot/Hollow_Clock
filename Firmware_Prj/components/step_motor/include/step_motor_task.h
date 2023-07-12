@@ -26,4 +26,4 @@
 #include "hal/dedic_gpio_cpu_ll.h"
 #include "esp_log.h"
 
-_Noreturn void step_motor_task(void *param);
+_Noreturn void step_motor_task(__attribute__((unused)) void *param);

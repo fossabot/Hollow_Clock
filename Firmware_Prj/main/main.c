@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: CC0-1.0
  */
 
-#include "step_motor.h"
+#include "step_motor_task.h"
 #include "smart_config.h"
 
 void app_main(void)

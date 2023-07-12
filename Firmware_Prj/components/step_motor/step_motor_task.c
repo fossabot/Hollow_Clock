@@ -5,18 +5,18 @@
  * SPDX-License-Identifier: CC0-1.0
  */
 
-#include "step_motor.h"
+#include "step_motor_task.h"
 static const char *TAG = "hc_step_motor";
 
 esp_err_t esp_rotate_step_motor(dedic_gpio_bundle_handle_t dedic_gpio_bundle_handle, int step_phase);
 
 static portMUX_TYPE spinlock;
 static const uint8_t code_octa_phase[8] = {0x08, 0x0c, 0x04, 0x06, 0x02, 0x03, 0x01, 0x09};
-//static const uint8_t code_double_qautra_phase[4] = {0x0c, 0x06, 0x03, 0x09};
-//static const uint8_t code_single_quatra_phase[4] = {0x08, 0x04, 0x02, 0x01};
+//static const uint8_t code_double_qaudra_phase[4] = {0x0c, 0x06, 0x03, 0x09};
+//static const uint8_t code_single_quadra_phase[4] = {0x08, 0x04, 0x02, 0x01};
 
 
-static bool IRAM_ATTR gptimer_on_alarm_cb(gptimer_handle_t timer, const gptimer_alarm_event_data_t *edata, void *user_data)
+static bool IRAM_ATTR gptimer_on_alarm_cb(__attribute__((unused)) gptimer_handle_t timer, __attribute__((unused)) const gptimer_alarm_event_data_t *edata, void *user_data)
 {
     dedic_gpio_bundle_handle_t *cb_dedic_gpio_bundle_handle = (dedic_gpio_bundle_handle_t *)user_data;
     portENTER_CRITICAL_ISR(&spinlock)
@@ -93,10 +93,10 @@ esp_err_t esp_rotate_step_motor(dedic_gpio_bundle_handle_t dedic_gpio_bundle_han
     step = step_phase * 4096 / 360;
     for (size_t j = 0; j < step; j += 8)
     {
-        for (int i = 0; i < 8; i++)
+        for (size_t motor_phase = 0; motor_phase < 8; motor_phase++)
         {
             portENTER_CRITICAL(&spinlock)
-            dedic_gpio_bundle_write(dedic_gpio_bundle_handle, (uint32_t)0b1111, (uint32_t)code_octa_phase[i]);
+            dedic_gpio_bundle_write(dedic_gpio_bundle_handle, (uint32_t)0b1111, (uint32_t)code_octa_phase[motor_phase]);
             esp_rom_delay_us(900);
             portEXIT_CRITICAL(&spinlock)
         }
