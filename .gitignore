@@ -55,3 +55,4 @@ Firmware_Prj/.idea
 Firmware_Prj/build
 Firmware_Prj/*.old
 Firmware_Prj/*.log
+Firmware_Prj/FOSSA_Analyze.ps1
