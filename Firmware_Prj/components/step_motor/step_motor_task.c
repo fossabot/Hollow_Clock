@@ -1,10 +1,10 @@
-#include <sys/cdefs.h>
 /*
  * SPDX-FileCopyrightText: 2010-2022 Espressif Systems (Shanghai) CO LTD
  *
  * SPDX-License-Identifier: CC0-1.0
  */
 
+#include <sys/cdefs.h>
 #include "step_motor_task.h"
 static const char *TAG = "hc_step_motor";
 
@@ -33,7 +33,7 @@ _Noreturn void step_motor_task(void *param)
 
     portMUX_INITIALIZE(&spinlock);
 
-    // 配置 GPIO
+    // Configure GPIO
     const int bundle_gpios[] = {4, 5, 6, 7};
     gpio_config_t io_conf = {
         .mode = GPIO_MODE_OUTPUT,
@@ -43,7 +43,7 @@ _Noreturn void step_motor_task(void *param)
         io_conf.pin_bit_mask = 1ULL << bundle_gpios[i];
         gpio_config(&io_conf);
     }
-    // 创建 bundle，仅输出
+    // Create bundle，only for output
     dedic_gpio_bundle_config_t bundle_config = {
         .gpio_array = bundle_gpios,
         .array_size = sizeof(bundle_gpios) / sizeof(bundle_gpios[0]),
