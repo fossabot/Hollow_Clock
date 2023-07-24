@@ -2,6 +2,9 @@ set(srcs "")
 set(requires "")
 set(include_dirs "")
 
+list(APPEND srcs         "espnow_task.c")
+list(APPEND include_dirs "include")
+
 list(APPEND srcs         "src/control/src/espnow_ctrl.c")
 list(APPEND include_dirs "src/control/include")
 
