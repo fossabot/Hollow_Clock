@@ -18,7 +18,7 @@
 
 /*NVS_FLASH Configuration */
 static const char *NVS_Name_space = "wifi_data";
-static const char *NVS_Key = "key1";
+static const char *NVS_Key = "key_wifi_data";
 static nvs_handle_t wifi_nvs_handle;
 static wifi_config_t wifi_config_stored;
 
