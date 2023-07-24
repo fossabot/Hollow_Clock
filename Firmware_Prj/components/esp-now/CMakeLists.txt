@@ -52,7 +52,7 @@ list(APPEND include_dirs "src/utils/include")
 
 list(APPEND requires "spi_flash" "nvs_flash" "esp_timer" "esp_wifi" "driver")
 
-idf_component_register(SRCS "${srcs}"
+idf_component_register(SRCS "espnow_task.c" "${srcs}"
                        INCLUDE_DIRS "${include_dirs}"
                        REQUIRES "${requires}")
 
